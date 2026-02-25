@@ -18,9 +18,9 @@
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], },
                     colors: {
                         apollo: {
-                            dark: '#124E43',    // Apollo Dark Teal
-                            green: '#008479',   // Apollo Add Button Green
-                            light: '#f3f7f6',   // Background tint
+                            dark: '#124E43',
+                            green: '#008479',
+                            light: '#f3f7f6',
                         }
                     }
                 }
@@ -60,7 +60,6 @@
             scrollbar-width: none;
         }
 
-        /* Product Card Hover Effect */
         .product-card {
             transition: all 0.2s ease-in-out;
             border: 1px solid #eef0f5;
@@ -71,30 +70,45 @@
             border-color: #d1d5db;
         }
 
-        .hero {
-            margin: 0 auto;
-            background-image: url(https://images.apollo247.in/images/ui_revamp_searchBanner1.svg), url(https://images.apollo247.in/images/ui_revamp_searchBanner2.svg);
-            background-position: 0% 100%, 100% 100%;
-            background-repeat: no-repeat;
+        /* SPA View Management */
+        .view-section {
+            display: none;
+            min-height: 60vh;
         }
-        
+
+        .view-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
-<body class="antialiased selection:bg-apollo-green selection:text-white">
+<body class="antialiased selection:bg-apollo-green selection:text-white flex flex-col min-h-screen">
 
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
 
             <div class="flex items-center gap-8">
-                <a href="#" class="flex items-center gap-2">
+                <a href="#" onclick="navigate('home')" class="flex items-center gap-2">
                     <div
                         class="w-10 h-10 rounded-full bg-apollo-green flex items-center justify-center text-white text-xl">
                         <i class="fas fa-plus"></i>
                     </div>
                     <div>
                         <h1 class="font-bold text-lg text-apollo-dark leading-tight">Shree Ram</h1>
-                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Medicines</p>
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Pharmacy</p>
                     </div>
                 </a>
 
@@ -102,30 +116,28 @@
                     <i class="fas fa-map-marker-alt text-apollo-green text-lg"></i>
                     <div>
                         <p class="text-[10px] text-gray-400 font-semibold uppercase">Delivery Address</p>
-                        <p class="font-bold text-apollo-dark">Gondal 360311 <i
-                                class="fas fa-chevron-down text-[10px] ml-1"></i></p>
+                        <p class="font-bold text-apollo-dark">Gondal 360311</p>
                     </div>
                 </div>
             </div>
 
             <div class="hidden lg:flex items-center gap-6 text-sm font-semibold text-gray-600">
-                <a href="#" class="text-apollo-green border-b-2 border-apollo-green pb-4 pt-4">Buy Medicines</a>
-                <a href="#" class="hover:text-apollo-green transition">Find Doctors</a>
-                <a href="#" class="hover:text-apollo-green transition">Lab Tests</a>
-                <a href="#" class="hover:text-apollo-green transition">Health Records</a>
+                <a href="#" onclick="navigate('home')"
+                    class="text-apollo-green border-b-2 border-apollo-green pb-4 pt-4">Buy Medicines</a>
+                <a href="https://wa.me/919537024365" target="_blank" class="hover:text-apollo-green transition">Upload
+                    Prescription</a>
+                <a href="#footer-contact" class="hover:text-apollo-green transition">Contact Store</a>
             </div>
 
             <div class="flex items-center gap-6">
-                <div class="relative cursor-pointer text-gray-600 hover:text-apollo-green transition">
+                <div onclick="navigate('cart')"
+                    class="relative cursor-pointer text-gray-600 hover:text-apollo-green transition flex items-center gap-2">
                     <i class="fas fa-shopping-cart text-2xl"></i>
+                    <span class="font-bold hidden sm:block">Cart</span>
                     <span
-                        class="absolute -top-2 -right-2 bg-pink-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold"
+                        class="absolute -top-2 -right-2 bg-pink-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold"
                         id="cart-count">0</span>
                 </div>
-                <button
-                    class="flex items-center gap-2 border border-gray-300 hover:border-apollo-green hover:text-apollo-green text-gray-700 px-4 py-1.5 rounded-full text-sm font-semibold transition bg-white">
-                    Login <i class="far fa-user-circle text-lg"></i>
-                </button>
             </div>
         </div>
 
@@ -133,275 +145,338 @@
             <div class="max-w-7xl mx-auto px-4">
                 <div
                     class="flex overflow-x-auto hide-scrollbar py-2.5 gap-8 text-xs font-semibold text-white whitespace-nowrap">
-                    <a href="#" class="hover:text-emerald-300 transition">Shree Ram Products</a>
-                    <a href="#" class="hover:text-emerald-300 transition">Baby Care</a>
-                    <a href="#" class="hover:text-emerald-300 transition">Nutritional Drinks & Supplements</a>
-                    <a href="#" class="hover:text-emerald-300 transition">Women Care</a>
-                    <a href="#" class="hover:text-emerald-300 transition">Personal Care</a>
-                    <a href="#" class="hover:text-emerald-300 transition">Ayurveda</a>
-                    <a href="#" class="hover:text-emerald-300 transition">Health Devices</a>
-                    <a href="#" class="hover:text-emerald-300 transition">Home Essentials</a>
-                    <a href="#" class="hover:text-emerald-300 transition">Health Condition</a>
+                    <a href="#" onclick="navigate('home')" class="hover:text-emerald-300 transition">All Products</a>
+                    <a href="#" onclick="navigate('category', 'Baby Care')"
+                        class="hover:text-emerald-300 transition">Baby Care</a>
+                    <a href="#" onclick="navigate('category', 'Personal Care')"
+                        class="hover:text-emerald-300 transition">Personal Care</a>
+                    <a href="#" onclick="navigate('category', 'Ayurveda')"
+                        class="hover:text-emerald-300 transition">Ayurveda</a>
+                    <a href="#" onclick="navigate('category', 'Nutrition')"
+                        class="hover:text-emerald-300 transition">Nutrition & Supplements</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <main>
-        <section class="relative bg-[#162c2a] pt-12 pb-16 overflow-hidden hero">
-            <div class="absolute inset-0 opacity-20 pointer-events-none"
-                style="background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 0%, transparent 20%), radial-gradient(circle at 90% 80%, rgba(255,255,255,0.1) 0%, transparent 20%);">
-            </div>
+    <main class="flex-grow">
 
-            <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 tracking-wide">
-                    Buy Medicines and Essentials
-                </h2>
-
-                <div class="relative max-w-3xl mx-auto shadow-2xl rounded-md">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <i class="fas fa-search text-gray-400 text-lg"></i>
-                    </div>
-                    <input type="text" placeholder="Search Medicines"
-                        class="w-full bg-white text-gray-800 rounded-md py-4 pl-12 pr-6 focus:outline-none focus:ring-2 focus:ring-apollo-green text-base">
+        <div id="view-home" class="view-section active">
+            <section class="relative bg-apollo-dark pt-12 pb-16 overflow-hidden">
+                <div class="absolute inset-0 opacity-20 pointer-events-none"
+                    style="background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 0%, transparent 20%), radial-gradient(circle at 90% 80%, rgba(255,255,255,0.1) 0%, transparent 20%);">
                 </div>
-            </div>
-        </section>
-
-        <section class="max-w-7xl mx-auto px-4 py-8 -mt-6 relative z-20">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div
-                    class="bg-[#E9FAEE] rounded-xl p-4 flex items-center justify-between cursor-pointer hover:shadow-md transition">
-                    <div class="flex items-center gap-3">
-                        <div class="bg-white p-2 rounded-lg text-green-600 border border-green-100"><i
-                                class="fas fa-file-prescription text-xl"></i></div>
-                        <div>
-                            <h3 class="font-bold text-gray-800 text-sm">Get 20%* off on Medicines</h3>
-                            <p class="text-green-600 text-[10px] font-bold uppercase mt-0.5">Upload Now</p>
+                <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 tracking-wide">Buy Medicines and
+                        Essentials</h2>
+                    <div class="relative max-w-3xl mx-auto shadow-2xl rounded-md">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400 text-lg"></i>
                         </div>
+                        <input type="text" id="searchInput" onkeyup="handleGlobalSearch()"
+                            placeholder="Search Medicines (e.g., Pampers, Loreal)"
+                            class="w-full bg-white text-gray-800 rounded-md py-4 pl-12 pr-6 focus:outline-none focus:ring-2 focus:ring-apollo-green text-base">
                     </div>
-                    <i class="fas fa-chevron-right text-gray-400 text-sm"></i>
                 </div>
+            </section>
 
-                <div
-                    class="bg-[#F1EDFD] rounded-xl p-4 flex items-center justify-between cursor-pointer hover:shadow-md transition">
-                    <div class="flex items-center gap-3">
-                        <div class="bg-white p-2 rounded-lg text-purple-600 border border-purple-100"><i
-                                class="fas fa-stethoscope text-xl"></i></div>
-                        <div>
-                            <h3 class="font-bold text-gray-800 text-sm">Doctor Appointment</h3>
-                            <p class="text-purple-600 text-[10px] font-bold uppercase mt-0.5">Book Now</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-400 text-sm"></i>
+            <section class="max-w-7xl mx-auto px-4 py-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-6">Minimum 50 Percent Off</h2>
+                <div id="min50-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
+            </section>
+
+            <section class="max-w-7xl mx-auto px-4 py-8 bg-apollo-light/50 border-y border-gray-100">
+                <h2 class="text-xl font-bold text-gray-900 mb-6">Hot Sellers</h2>
+                <div id="hot-sellers-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
+            </section>
+
+            <section class="max-w-7xl mx-auto px-4 py-10 mt-4">
+                <h2 class="text-xl font-bold text-gray-900 mb-6">Shop By Brand</h2>
+                <div id="brands-grid" class="flex overflow-x-auto hide-scrollbar gap-6 pb-4">
                 </div>
+            </section>
+        </div>
 
-                <div
-                    class="bg-[#FFF3D6] rounded-xl p-4 flex items-center justify-between cursor-pointer hover:shadow-md transition">
-                    <div class="flex items-center gap-3">
-                        <div class="bg-white p-2 rounded-lg text-orange-500 border border-orange-100"><i
-                                class="fas fa-shield-alt text-xl"></i></div>
-                        <div>
-                            <h3 class="font-bold text-gray-800 text-sm">Health Insurance</h3>
-                            <p class="text-orange-500 text-[10px] font-bold uppercase mt-0.5">Explore Plans</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-400 text-sm"></i>
+        <div id="view-category" class="view-section max-w-7xl mx-auto px-4 py-12">
+            <h2 id="category-title" class="text-2xl font-bold text-gray-900 mb-8 border-b pb-4">Category Name</h2>
+            <div id="category-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            </div>
+            <div id="no-products-msg" class="hidden text-center py-12 text-gray-500">
+                <i class="fas fa-box-open text-4xl mb-4 text-gray-300"></i>
+                <p>No products found for this search.</p>
+            </div>
+        </div>
+
+        <div id="view-cart" class="view-section max-w-4xl mx-auto px-4 py-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8 border-b pb-4"><i
+                    class="fas fa-shopping-cart text-apollo-green"></i> Your Cart</h2>
+
+            <div id="cart-items-container" class="space-y-4 mb-8">
+            </div>
+
+            <div id="cart-summary" class="bg-gray-50 p-6 rounded-xl border border-gray-200 hidden">
+                <div class="flex justify-between font-bold text-lg mb-4">
+                    <span>Total Amount:</span>
+                    <span id="cart-total-price" class="text-apollo-green">₹0</span>
                 </div>
+                <a id="whatsapp-checkout-btn" href="#" target="_blank"
+                    class="w-full block text-center bg-[#25D366] hover:bg-[#1ebd5b] text-white font-bold py-3 rounded-lg transition shadow-lg">
+                    <i class="fab fa-whatsapp text-lg mr-2"></i> Checkout via WhatsApp
+                </a>
+            </div>
 
-                <div
-                    class="bg-[#FCEDF2] rounded-xl p-4 flex items-center justify-between cursor-pointer hover:shadow-md transition">
-                    <div class="flex items-center gap-3">
-                        <div class="bg-white p-2 rounded-lg text-pink-600 border border-pink-100"><i
-                                class="fas fa-flask text-xl"></i></div>
-                        <div>
-                            <h3 class="font-bold text-gray-800 text-sm">Lab Tests</h3>
-                            <p class="text-pink-600 text-[10px] font-bold uppercase mt-0.5">At Home</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-400 text-sm"></i>
+            <div id="empty-cart-msg" class="text-center py-12">
+                <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shopping-basket text-4xl text-gray-300"></i>
                 </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Your cart is empty!</h3>
+                <p class="text-gray-500 mb-6">Looks like you haven't added any medicines yet.</p>
+                <button onclick="navigate('home')"
+                    class="bg-apollo-green text-white px-6 py-2 rounded-full font-bold">Return to Shop</button>
             </div>
-        </section>
-
-        <section class="max-w-7xl mx-auto px-4 py-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-6">Browse by Health Conditions</h2>
-            <div id="conditions-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            </div>
-        </section>
-
-        <section class="max-w-7xl mx-auto px-4 py-8">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-gray-900">Minimum 50 Percent Off</h2>
-                <a href="#" class="text-apollo-green text-sm font-semibold hover:underline">View All</a>
-            </div>
-            <div id="min50-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            </div>
-        </section>
-
-        <section class="max-w-7xl mx-auto px-4 py-8 bg-apollo-light/50 border-y border-gray-100">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-gray-900">Hot Sellers</h2>
-                <a href="#" class="text-apollo-green text-sm font-semibold hover:underline">View All</a>
-            </div>
-            <div id="hot-sellers-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            </div>
-        </section>
-
-        <section class="max-w-7xl mx-auto px-4 py-10">
-            <h2 class="text-xl font-bold text-gray-900 mb-6">Shop By Brand</h2>
-            <div id="brands-grid" class="flex overflow-x-auto hide-scrollbar gap-6 pb-4">
-            </div>
-        </section>
+        </div>
 
     </main>
 
-    <a href="https://wa.me/919537024365?text=Hi,%20I%20want%20to%20order%20medicines" target="_blank"
+    <a href="https://wa.me/919537024365" target="_blank"
         class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#1ebd5b] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
         <i class="fab fa-whatsapp text-3xl"></i>
     </a>
 
-    <footer class="bg-apollo-dark text-white pt-12 pb-6 border-t border-gray-800">
+    <footer id="footer-contact" class="bg-apollo-dark text-white pt-12 pb-6 border-t border-gray-800 mt-auto">
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 mb-8">
             <div>
                 <div class="flex items-center gap-3 mb-6">
                     <div
                         class="w-10 h-10 rounded bg-white flex items-center justify-center text-apollo-dark text-xl font-bold">
-                        <i class="fas fa-plus"></i>
-                    </div>
+                        <i class="fas fa-plus"></i></div>
                     <span class="font-bold text-2xl">Shree Ram Medicine</span>
                 </div>
                 <p class="text-gray-300 mb-6 text-sm leading-relaxed max-w-md">Your trusted partner for authentic
-                    healthcare products in Gondal. Quality medicines, expert advice, and fast home delivery.</p>
-
+                    healthcare products in Gondal.</p>
                 <ul class="space-y-4 text-sm text-gray-300">
-                    <li class="flex items-start gap-3">
-                        <i class="fas fa-map-marker-alt text-emerald-400 mt-1"></i>
-                        <span>16-17 Dindayal shopping centre, Central chowk,<br>Gondal, Gujarat 360311</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-phone-alt text-emerald-400"></i>
-                        <a href="tel:9537024365" class="hover:text-emerald-400 transition">+91 95370 24365</a>
-                    </li>
+                    <li class="flex items-start gap-3"><i
+                            class="fas fa-map-marker-alt text-emerald-400 mt-1"></i><span>16-17 Dindayal shopping
+                            centre, Central chowk,<br>Gondal, Gujarat 360311</span></li>
+                    <li class="flex items-center gap-3"><i class="fas fa-phone-alt text-emerald-400"></i><a
+                            href="tel:9537024365" class="hover:text-emerald-400">+91 95370 24365</a></li>
                 </ul>
             </div>
-
             <div class="w-full h-64 rounded-xl overflow-hidden border-2 border-gray-700 shadow-lg bg-gray-800">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118227.6044437256!2d70.71077651083431!3d21.96191790409744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3958380e2f5b66d9%3A0xc66517a6db33af3c!2sGondal%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1707900000000!5m2!1sen!2sin"
-                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 text-center border-t border-gray-700 pt-6 text-xs text-gray-400">
-            &copy; 2026 Shree Ram Medicine. All rights reserved.
+            © 2026 Shree Ram Medicine. Built for GitHub.
         </div>
     </footer>
-
     <script>
-        let cartCount = 0;
+        // MASTER DATABASE
+        const allProducts = [
+            // Min 50% Off Products
+            { id: 1, name: "Loreal Total Repair Serum, 80 ml", price: 219, mrp: 399, off: "45% off", category: "Personal Care", isMin50: true, isHotSeller: false, img: "https://images.apollo247.in/pub/media/catalog/product/l/o/lor0419_1_.jpg", brand: "LOREAL" },
+            { id: 2, name: "Nivea Men Fresh Active Deodorant Spray, 150 ml", price: 149.5, mrp: 299, off: "50% off", category: "Personal Care", isMin50: true, isHotSeller: false, img: "https://www.bbassets.com/media/uploads/p/l/263799_13-nivea-fresh-active-men-deodorant-48h-long-lasting-freshness.jpg", brand: "NIVEA" },
+            { id: 3, name: "Lacto Calamine SPF 50 PA+++ Sunscreen", price: 199.5, mrp: 399, off: "50% off", category: "Personal Care", isMin50: true, isHotSeller: false, img: "https://wellify.in/cdn/shop/files/PDP-50g-01.jpg?v=1710836157", brand: "LACTO CALAMINE" },
+            { id: 4, name: "Dabur Red Toothpaste Family Pack 350 gm", price: 141.6, mrp: 283, off: "50% off", category: "Ayurveda", isMin50: true, isHotSeller: false, img: "https://images.apollo247.in/pub/media/catalog/product/d/a/dabur_rtp_100g_carton_front.jpg", brand: "DABUR" },
+            { id: 5, name: "Vaseline Healthy Bright Sun+Pollution Protection", price: 498.4, mrp: 639, off: "22% off", category: "Personal Care", isMin50: true, isHotSeller: false, img: "https://www.jiomart.com/images/product/original/860724/vaseline-healthy-bright-sun-pollution-protection-spf-30-pa-body-lotion-400-ml-prod-860724-0-202402011834.jpg?im=Resize=(1000,1000)", brand: "VASELINE" },
+            { id: 6, name: "Garnier Bright Complete Face Wash", price: 190, mrp: 379, off: "50% off", category: "Personal Care", isMin50: true, isHotSeller: false, img: "https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-80,f-webp,w-400,dpr-3,c-at_max%20400w", brand: "GARNIER" },
 
-        function addToCart(event) {
-            cartCount++;
-            document.getElementById('cart-count').innerText = cartCount;
-            // Button animation
+            // Hot Sellers
+            { id: 7, name: "The Man Company Rouge Perfume", price: 224.8, mrp: 899, off: "75% off", category: "Personal Care", isMin50: false, isHotSeller: true, img: "https://www.themancompany.com/cdn/shop/files/1100x1100Primarycopy2.jpg?v=1686648946", brand: "THE MAN COMPANY" },
+            { id: 8, name: "Dabur Vatika Henna & Amla Shampoo", price: 65.5, mrp: 131, off: "50% off", category: "Personal Care", isMin50: false, isHotSeller: true, img: "https://images.apollo247.in/pub/media/catalog/product/d/a/dabur_vatika_henna_amla_health_shampoo-1.jpg", brand: "DABUR" },
+            { id: 9, name: "Ensure Diabetes Care Vanilla", price: 1250, mrp: 1350, off: "7% off", category: "Nutrition", isMin50: false, isHotSeller: true, img: "https://cdn01.pharmeasy.in/dam/products_otc/Q25671/ensure-diabetes-care-nutrition-drink-vanilla-delight-flavour-box-200-gm-6.1-1766752219.jpg", brand: "ENSURE" },
+            { id: 10, name: "Volini Pain Relief Gel, 50 gm", price: 185, mrp: 215, off: "14% off", category: "Personal Care", isMin50: false, isHotSeller: true, img: "https://cdn01.pharmeasy.in/dam/products_otc/183151/volini-pain-relief-gel-tube-of-50-g-6.1-1712726398.jpg", brand: "VOLINI" },
+            { id: 11, name: "Pampers Active Baby Diapers, Large", price: 549, mrp: 699, off: "21% off", category: "Baby Care", isMin50: false, isHotSeller: true, img: "https://m.media-amazon.com/images/I/614Cx3FK2bL.jpg", brand: "PAMPERS" },
+            { id: 12, name: "Revital H Multivitamin Capsules", price: 285, mrp: 320, off: "11% off", category: "Nutrition", isMin50: false, isHotSeller: true, img: "https://m.media-amazon.com/images/I/616Xs+iRA2L._AC_UF1000,1000_QL80_.jpg", brand: "REVITAL" }
+        ];
+
+        // Brands Array
+        const brands = [
+            { image: "https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/6d01bf9840733.560db0b5e841c.jpg", name: "PAMPERS" },
+            { image: "https://i.pinimg.com/736x/eb/c9/68/ebc9685f5452e360f7931b23c72c8c57.jpg", name: "AVEENO" },
+            { image: "https://i.pinimg.com/564x/8c/d0/7c/8cd07c3b9bfd82e4043ace22bdfc88b5.jpg", name: "VOLINI" },
+            { image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGnPmQVpKajQTLYX5BAjCh3atFaACpI9l4sw&s", name: "MAMYPOKO" },
+            { image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxJamRSC66-c5HrevAyeEWpV5eCAROwI2fSg&s", name: "FAST&UP" },
+            { image: "https://cdn.shopify.com/s/files/1/0272/4714/9155/files/logo-aboutus.png?1207", name: "HIMALAYA" },
+            { image: "https://download.logo.wine/logo/Dabur/Dabur-Logo.wine.png", name: "DABUR" }
+        ];
+
+        // CART STATE & LOCAL STORAGE INIT
+        let cart = JSON.parse(localStorage.getItem('shreeRamCart')) || [];
+        document.getElementById('cart-count').innerText = cart.length;
+
+        // 1. ROUTING SYSTEM
+        function navigate(viewName, param = null) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            if (viewName !== 'home') document.getElementById('searchInput').value = '';
+
+            document.getElementById(`view-${viewName}`).classList.add('active');
+            window.scrollTo(0, 0);
+
+            if (viewName === 'category') {
+                loadCategoryPage(param);
+            } else if (viewName === 'cart') {
+                renderCartPage();
+            } else if (viewName === 'home') {
+                renderHomeProducts();
+            }
+        }
+
+        // 2. HTML GENERATOR
+        function generateProductHTML(product) {
+            return `
+                    <div class="product-card bg-white rounded-xl p-4 flex flex-col relative h-full">
+                        <div class="h-32 mb-4 flex items-center justify-center p-2">
+                            <img src="${product.img}" alt="${product.name}" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <h4 class="font-medium text-gray-800 text-[13px] leading-snug mb-3 line-clamp-2">${product.name}</h4>
+                        <div class="mt-auto">
+                            <div class="flex items-end gap-2 mb-1">
+                                <span class="text-sm font-bold text-gray-900">₹${product.price}</span>
+                                <span class="text-[10px] text-gray-400 line-through">MRP ₹${product.mrp}</span>
+                                <span class="text-[10px] text-green-600 font-bold">${product.off}</span>
+                            </div>
+                            <button onclick="addToCart(${product.id}, event)" class="w-full mt-3 bg-apollo-green hover:bg-teal-700 text-white font-bold py-1.5 rounded text-xs transition">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                `;
+        }
+
+        // 3. RENDER HOME PAGE
+        function renderHomeProducts() {
+            const min50 = allProducts.filter(p => p.isMin50);
+            const hot = allProducts.filter(p => p.isHotSeller);
+
+            document.getElementById('min50-grid').innerHTML = min50.map(generateProductHTML).join('');
+            document.getElementById('hot-sellers-grid').innerHTML = hot.map(generateProductHTML).join('');
+
+            const brandGrid = document.getElementById('brands-grid');
+            brandGrid.innerHTML = brands.map(brand => `
+                    <div class="flex flex-col items-center gap-2 cursor-pointer group min-w-[100px]" onclick="navigate('category', '${brand.name}')">
+                        <div class="w-20 h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-apollo-green transition p-2 overflow-hidden">
+                            <img src="${brand.image}" alt="${brand.name}" class="w-full h-full object-contain mix-blend-multiply">
+                        </div>
+                        <span class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">${brand.name}</span>
+                    </div>
+                `).join('');
+        }
+
+        // 4. RENDER CATEGORY/SEARCH PAGE
+        function loadCategoryPage(categoryName) {
+            document.getElementById('category-title').innerText = categoryName;
+
+            const filtered = allProducts.filter(p =>
+                p.category === categoryName ||
+                p.name.toLowerCase().includes(categoryName.toLowerCase()) ||
+                p.brand.toLowerCase().includes(categoryName.toLowerCase())
+            );
+
+            const grid = document.getElementById('category-grid');
+            const noMsg = document.getElementById('no-products-msg');
+
+            if (filtered.length > 0) {
+                grid.innerHTML = filtered.map(generateProductHTML).join('');
+                grid.style.display = 'grid';
+                noMsg.style.display = 'none';
+            } else {
+                grid.style.display = 'none';
+                noMsg.style.display = 'block';
+            }
+        }
+
+        // --- NEW DEBOUNCED SEARCH LOGIC ---
+        let searchTimeout; // This variable acts as our "elevator timer"
+
+        function handleGlobalSearch() {
+            // 1. Someone pressed a key! Clear the old timer immediately.
+            clearTimeout(searchTimeout);
+
+            // 2. Start a new 400ms countdown timer.
+            searchTimeout = setTimeout(() => {
+                const query = document.getElementById('searchInput').value.trim();
+
+                if (query.length > 0) {
+                    navigate('category', query);
+                    document.getElementById('category-title').innerText = `Search Results: "${query}"`;
+                } else {
+                    navigate('home');
+                }
+            }, 400); // Wait exactly 400 milliseconds after the user STOPS typing before running this block
+        }
+        // ----------------------------------
+
+        // 5. CART LOGIC
+        function addToCart(productId, event) {
+            const product = allProducts.find(p => p.id === productId);
+            cart.push(product);
+
+            localStorage.setItem('shreeRamCart', JSON.stringify(cart));
+            document.getElementById('cart-count').innerText = cart.length;
+
             const btn = event.currentTarget;
             btn.innerHTML = 'ADDED <i class="fas fa-check ml-1"></i>';
             btn.classList.replace('bg-apollo-green', 'bg-green-600');
             setTimeout(() => {
-                btn.innerHTML = 'ADD';
+                btn.innerHTML = 'ADD TO CART';
                 btn.classList.replace('bg-green-600', 'bg-apollo-green');
             }, 1000);
         }
 
-        // --- DATA ARRAYS ---
+        function renderCartPage() {
+            const container = document.getElementById('cart-items-container');
+            const summary = document.getElementById('cart-summary');
+            const emptyMsg = document.getElementById('empty-cart-msg');
 
-        // 1. Health Conditions
-        const conditions = [
-            { name: "Diabetes Care", icon: "https://cdn-icons-png.flaticon.com/512/2860/2860935.png" },
-            { name: "Cardiac Care", icon: "https://cdn-icons-png.flaticon.com/512/2966/2966327.png" },
-            { name: "Stomach Care", icon: "https://cdn-icons-png.flaticon.com/512/2966/2966465.png" },
-            { name: "Pain Relief", icon: "https://cdn-icons-png.flaticon.com/512/3034/3034293.png" },
-            { name: "Liver Care", icon: "https://cdn-icons-png.flaticon.com/512/2966/2966405.png" },
-            { name: "Respiratory", icon: "https://cdn-icons-png.flaticon.com/512/2966/2966355.png" }
-        ];
+            container.innerHTML = '';
 
-        // 2. Minimum 50% Off Products
-        const min50OffProducts = [
-            { name: "Loreal Total Repair Serum, 80 ml", price: 219, mrp: 399, off: "45% off", img: "https://m.media-amazon.com/images/I/41A41zT1P+L._SX300_SY300_QL70_FMwebp_.jpg" },
-            { name: "Nivea Men Fresh Active Deodorant Spray, 150 ml", price: 149.5, mrp: 299, off: "50% off", img: "https://m.media-amazon.com/images/I/31Y50i795nL._SX300_SY300_QL70_FMwebp_.jpg" },
-            { name: "Lacto Calamine SPF 50 PA+++ Sunscreen", price: 199.5, mrp: 399, off: "50% off", img: "https://m.media-amazon.com/images/I/41D8jK8T9VL._SX300_SY300_QL70_FMwebp_.jpg" },
-            { name: "Dabur Red Toothpaste Family Pack 350 gm", price: 141.6, mrp: 283, off: "50% off", img: "https://m.media-amazon.com/images/I/61N+xM56TLL._SY450_.jpg" },
-            { name: "Vaseline Healthy Bright Sun+Pollution Protection", price: 498.4, mrp: 639, off: "22% off", img: "https://m.media-amazon.com/images/I/517lFm1vC4L._SX300_SY300_QL70_FMwebp_.jpg" },
-            { name: "Garnier Bright Complete Vitamin C Face Wash", price: 190, mrp: 379, off: "50% off", img: "https://m.media-amazon.com/images/I/513yvPqQ0YL._SX300_SY300_QL70_FMwebp_.jpg" }
-        ];
+            if (cart.length === 0) {
+                summary.style.display = 'none';
+                emptyMsg.style.display = 'block';
+                return;
+            }
 
-        // 3. Hot Sellers
-        const hotSellersProducts = [
-            { name: "The Man Company Rouge Eau De Toilette Perfume", price: 224.8, mrp: 899, off: "75% off", img: "https://m.media-amazon.com/images/I/61YgB2u6pHL._SY450_.jpg" },
-            { name: "Dabur Vatika Henna & Amla Health Shampoo, 180 ml", price: 65.5, mrp: 131, off: "50% off", img: "https://m.media-amazon.com/images/I/51zJ86B4V1L._SX300_SY300_QL70_FMwebp_.jpg" },
-            { name: "Ensure Diabetes Care Powder Vanilla Flavor", price: 1250, mrp: 1350, off: "7% off", img: "https://m.media-amazon.com/images/I/61t-zJ1j3wL._SY450_.jpg" },
-            { name: "Volini Pain Relief Gel, 50 gm", price: 185, mrp: 215, off: "14% off", img: "https://m.media-amazon.com/images/I/61wSjX8XUCL._SY450_.jpg" },
-            { name: "Pampers Active Baby Diapers, Large size", price: 549, mrp: 699, off: "21% off", img: "https://m.media-amazon.com/images/I/61s82n4z5EL._SY450_.jpg" },
-            { name: "Revital H Multivitamin Capsules, 30 Count", price: 285, mrp: 320, off: "11% off", img: "https://m.media-amazon.com/images/I/61uYg+yv3AL._SY450_.jpg" }
-        ];
+            emptyMsg.style.display = 'none';
+            summary.style.display = 'block';
 
-        // 4. Brands
-        const brands = ["PAMPERS", "AVEENO", "VOLINI", "REVITAL", "MAMYPOKO", "FAST&UP", "HIMALAYA", "DABUR"];
+            let total = 0;
+            let orderText = "Hi, I want to order the following items:%0A%0A";
 
-        // --- RENDER FUNCTIONS ---
+            cart.forEach((item, index) => {
+                total += item.price;
+                orderText += `- ${item.name} (₹${item.price})%0A`;
 
-        // Render Conditions
-        const condGrid = document.getElementById('conditions-grid');
-        conditions.forEach(cond => {
-            condGrid.innerHTML += `
-                <div class="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:shadow-md transition">
-                    <div class="bg-gray-50 p-2 rounded-lg"><img src="${cond.icon}" alt="${cond.name}" class="w-8 h-8 opacity-70"></div>
-                    <span class="text-sm font-semibold text-gray-800">${cond.name}</span>
-                </div>
-            `;
-        });
-
-        // HTML Generator for Products
-        function generateProductHTML(product) {
-            return `
-                <div class="product-card bg-white rounded-xl p-4 flex flex-col relative h-full">
-                    <div class="h-32 mb-4 flex items-center justify-center p-2">
-                        <img src="${product.img}" alt="${product.name}" class="max-h-full max-w-full object-contain">
-                    </div>
-                    <h4 class="font-medium text-gray-800 text-[13px] leading-snug mb-3 line-clamp-2">${product.name}</h4>
-                    
-                    <div class="mt-auto">
-                        <div class="flex items-end gap-2 mb-1">
-                            <span class="text-sm font-bold text-gray-900">₹${product.price}</span>
-                            <span class="text-[10px] text-gray-400 line-through">MRP ₹${product.mrp}</span>
-                            <span class="text-[10px] text-green-600 font-bold">${product.off}</span>
+                container.innerHTML += `
+                        <div class="flex items-center gap-4 bg-white border border-gray-200 p-4 rounded-xl">
+                            <img src="${item.img}" class="w-16 h-16 object-contain mix-blend-multiply">
+                            <div class="flex-grow">
+                                <h4 class="font-bold text-gray-800 text-sm">${item.name}</h4>
+                                <p class="text-apollo-green font-bold">₹${item.price}</p>
+                            </div>
+                            <button onclick="removeFromCart(${index})" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </div>
-                        <button onclick="addToCart(event)" class="w-full mt-3 bg-apollo-green hover:bg-teal-700 text-white font-bold py-1.5 rounded text-xs transition">
-                            ADD
-                        </button>
-                    </div>
-                </div>
-            `;
+                    `;
+            });
+
+            orderText += `%0ATotal: ₹${total.toFixed(2)}`;
+            document.getElementById('cart-total-price').innerText = `₹${total.toFixed(2)}`;
+            document.getElementById('whatsapp-checkout-btn').href = `https://wa.me/919537024365?text=${orderText}`;
         }
 
-        // Render Products
-        document.getElementById('min50-grid').innerHTML = min50OffProducts.map(generateProductHTML).join('');
-        document.getElementById('hot-sellers-grid').innerHTML = hotSellersProducts.map(generateProductHTML).join('');
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('shreeRamCart', JSON.stringify(cart));
+            document.getElementById('cart-count').innerText = cart.length;
+            renderCartPage();
+        }
 
-        // Render Brands
-        const brandGrid = document.getElementById('brands-grid');
-        brands.forEach(brand => {
-            brandGrid.innerHTML += `
-                <div class="flex flex-col items-center gap-2 cursor-pointer group min-w-[100px]">
-                    <div class="w-20 h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-apollo-green transition p-2">
-                        <span class="font-bold text-gray-400 text-sm tracking-widest text-center group-hover:text-apollo-green">${brand}</span>
-                    </div>
-                    <span class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">${brand}</span>
-                </div>
-            `;
-        });
+        // Initialize the app
+        renderHomeProducts();
     </script>
 </body>
 
