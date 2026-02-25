@@ -77,7 +77,6 @@
             background-position: 0% 100%, 100% 100%;
             background-repeat: no-repeat;
         }
-        
     </style>
 </head>
 
@@ -233,7 +232,7 @@
         <section class="max-w-7xl mx-auto px-4 py-8">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-bold text-gray-900">Minimum 50 Percent Off</h2>
-                <a href="#" class="text-apollo-green text-sm font-semibold hover:underline">View All</a>
+                <!-- <a href="#" class="text-apollo-green text-sm font-semibold hover:underline">View All</a> -->
             </div>
             <div id="min50-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             </div>
@@ -242,7 +241,7 @@
         <section class="max-w-7xl mx-auto px-4 py-8 bg-apollo-light/50 border-y border-gray-100">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-bold text-gray-900">Hot Sellers</h2>
-                <a href="#" class="text-apollo-green text-sm font-semibold hover:underline">View All</a>
+                <!-- <a href="#" class="text-apollo-green text-sm font-semibold hover:underline">View All</a> -->
             </div>
             <div id="hot-sellers-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             </div>
@@ -329,26 +328,56 @@
 
         // 2. Minimum 50% Off Products
         const min50OffProducts = [
-            { name: "Loreal Total Repair Serum, 80 ml", price: 219, mrp: 399, off: "45% off", img: "https://m.media-amazon.com/images/I/41A41zT1P+L._SX300_SY300_QL70_FMwebp_.jpg" },
-            { name: "Nivea Men Fresh Active Deodorant Spray, 150 ml", price: 149.5, mrp: 299, off: "50% off", img: "https://m.media-amazon.com/images/I/31Y50i795nL._SX300_SY300_QL70_FMwebp_.jpg" },
-            { name: "Lacto Calamine SPF 50 PA+++ Sunscreen", price: 199.5, mrp: 399, off: "50% off", img: "https://m.media-amazon.com/images/I/41D8jK8T9VL._SX300_SY300_QL70_FMwebp_.jpg" },
-            { name: "Dabur Red Toothpaste Family Pack 350 gm", price: 141.6, mrp: 283, off: "50% off", img: "https://m.media-amazon.com/images/I/61N+xM56TLL._SY450_.jpg" },
-            { name: "Vaseline Healthy Bright Sun+Pollution Protection", price: 498.4, mrp: 639, off: "22% off", img: "https://m.media-amazon.com/images/I/517lFm1vC4L._SX300_SY300_QL70_FMwebp_.jpg" },
-            { name: "Garnier Bright Complete Vitamin C Face Wash", price: 190, mrp: 379, off: "50% off", img: "https://m.media-amazon.com/images/I/513yvPqQ0YL._SX300_SY300_QL70_FMwebp_.jpg" }
+            { name: "Loreal Total Repair Serum, 80 ml", price: 219, mrp: 399, off: "45% off", img: "https://images.apollo247.in/pub/media/catalog/product/l/o/lor0419_1_.jpg" },
+            { name: "Nivea Men Fresh Active Deodorant Spray, 150 ml", price: 149.5, mrp: 299, off: "50% off", img: "https://www.bbassets.com/media/uploads/p/l/263799_13-nivea-fresh-active-men-deodorant-48h-long-lasting-freshness.jpg" },
+            { name: "Lacto Calamine SPF 50 PA+++ Sunscreen", price: 199.5, mrp: 399, off: "50% off", img: "https://wellify.in/cdn/shop/files/PDP-50g-01.jpg?v=1710836157" },
+            { name: "Dabur Red Toothpaste Family Pack 350 gm", price: 141.6, mrp: 283, off: "50% off", img: "https://images.apollo247.in/pub/media/catalog/product/d/a/dabur_rtp_100g_carton_front.jpg" },
+            { name: "Vaseline Healthy Bright Sun+Pollution Protection", price: 498.4, mrp: 639, off: "22% off", img: "https://www.jiomart.com/images/product/original/860724/vaseline-healthy-bright-sun-pollution-protection-spf-30-pa-body-lotion-400-ml-prod-860724-0-202402011834.jpg?im=Resize=(1000,1000)" },
+            { name: "Garnier Bright Complete Vitamin C Face Wash", price: 190, mrp: 379, off: "50% off", img: "https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-80,f-webp,w-400,dpr-3,c-at_max%20400w" }
         ];
 
         // 3. Hot Sellers
         const hotSellersProducts = [
-            { name: "The Man Company Rouge Eau De Toilette Perfume", price: 224.8, mrp: 899, off: "75% off", img: "https://m.media-amazon.com/images/I/61YgB2u6pHL._SY450_.jpg" },
-            { name: "Dabur Vatika Henna & Amla Health Shampoo, 180 ml", price: 65.5, mrp: 131, off: "50% off", img: "https://m.media-amazon.com/images/I/51zJ86B4V1L._SX300_SY300_QL70_FMwebp_.jpg" },
-            { name: "Ensure Diabetes Care Powder Vanilla Flavor", price: 1250, mrp: 1350, off: "7% off", img: "https://m.media-amazon.com/images/I/61t-zJ1j3wL._SY450_.jpg" },
-            { name: "Volini Pain Relief Gel, 50 gm", price: 185, mrp: 215, off: "14% off", img: "https://m.media-amazon.com/images/I/61wSjX8XUCL._SY450_.jpg" },
-            { name: "Pampers Active Baby Diapers, Large size", price: 549, mrp: 699, off: "21% off", img: "https://m.media-amazon.com/images/I/61s82n4z5EL._SY450_.jpg" },
-            { name: "Revital H Multivitamin Capsules, 30 Count", price: 285, mrp: 320, off: "11% off", img: "https://m.media-amazon.com/images/I/61uYg+yv3AL._SY450_.jpg" }
+            { name: "The Man Company Rouge Eau De Toilette Perfume", price: 224.8, mrp: 899, off: "75% off", img: "https://www.themancompany.com/cdn/shop/files/1100x1100Primarycopy2.jpg?v=1686648946" },
+            { name: "Dabur Vatika Henna & Amla Health Shampoo, 180 ml", price: 65.5, mrp: 131, off: "50% off", img: "https://images.apollo247.in/pub/media/catalog/product/d/a/dabur_vatika_henna_amla_health_shampoo-1.jpg" },
+            { name: "Ensure Diabetes Care Powder Vanilla Flavor", price: 1250, mrp: 1350, off: "7% off", img: "https://cdn01.pharmeasy.in/dam/products_otc/Q25671/ensure-diabetes-care-nutrition-drink-vanilla-delight-flavour-box-200-gm-6.1-1766752219.jpg" },
+            { name: "Volini Pain Relief Gel, 50 gm", price: 185, mrp: 215, off: "14% off", img: "https://cdn01.pharmeasy.in/dam/products_otc/183151/volini-pain-relief-gel-tube-of-50-g-6.1-1712726398.jpg" },
+            { name: "Pampers Active Baby Diapers, Large size", price: 549, mrp: 699, off: "21% off", img: "https://m.media-amazon.com/images/I/614Cx3FK2bL.jpg" },
+            { name: "Revital H Multivitamin Capsules, 30 Count", price: 285, mrp: 320, off: "11% off", img: "https://m.media-amazon.com/images/I/616Xs+iRA2L._AC_UF1000,1000_QL80_.jpg" }
         ];
 
         // 4. Brands
-        const brands = ["PAMPERS", "AVEENO", "VOLINI", "REVITAL", "MAMYPOKO", "FAST&UP", "HIMALAYA", "DABUR"];
+        const brands = [
+            {
+                image: "https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/6d01bf9840733.560db0b5e841c.jpg",
+                name: "PAMPERS"
+
+            },
+            {
+                image: "https://i.pinimg.com/736x/eb/c9/68/ebc9685f5452e360f7931b23c72c8c57.jpg",
+                name: "AVEENO"
+            },
+            {
+                image: "https://i.pinimg.com/564x/8c/d0/7c/8cd07c3b9bfd82e4043ace22bdfc88b5.jpg",
+                name: "VOLINI"
+            },
+            {
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGnPmQVpKajQTLYX5BAjCh3atFaACpI9l4sw&s",
+                name: "MAMYPOKO"
+            },
+            {
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxJamRSC66-c5HrevAyeEWpV5eCAROwI2fSg&s",
+                name: "FAST&UP"
+            },
+            {
+                image: "https://cdn.shopify.com/s/files/1/0272/4714/9155/files/logo-aboutus.png?1207",
+                name: "HIMALAYA"
+            },
+            {
+                image: "https://download.logo.wine/logo/Dabur/Dabur-Logo.wine.png",
+                name: "DABUR"
+            }
+        ]
 
         // --- RENDER FUNCTIONS ---
 
@@ -395,10 +424,10 @@
         brands.forEach(brand => {
             brandGrid.innerHTML += `
                 <div class="flex flex-col items-center gap-2 cursor-pointer group min-w-[100px]">
-                    <div class="w-20 h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-apollo-green transition p-2">
-                        <span class="font-bold text-gray-400 text-sm tracking-widest text-center group-hover:text-apollo-green">${brand}</span>
-                    </div>
-                    <span class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">${brand}</span>
+                    <img src=${brand.image} class="w-20 h-20 bg-white border border-gray-200 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-apollo-green transition p-2"
+                    />
+                    <span class="font-bold text-gray-400 text-sm tracking-widest text-center group-hover:text-apollo-green">${brand.name}</span>
+                    <span class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">${brand.name}</span>
                 </div>
             `;
         });
